@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:smartotp_plugin/smartotp_plugin.dart';
 
@@ -13,13 +13,11 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   String _secretKey = 'D6DWFQ236VLOQSQE';
   int type = 0; //0 with TOTP , 1 with HOTP
   String _smartOtp = '123456';
-
 
   @override
   void initState() {
@@ -30,11 +28,11 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     String platformVersion;
-    String smartOtp;
+    late String smartOtp;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       platformVersion = await SmartotpPlugin.platformVersion;
-      smartOtp = await SmartotpPlugin.getSmartOtp(_secretKey , type);
+      smartOtp = await SmartotpPlugin.getSmartOtp(_secretKey, type);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -62,7 +60,9 @@ class _MyAppState extends State<MyApp> {
             Center(
               child: Text('Running on: $_platformVersion\n'),
             ),
-            SizedBox(height: 30,),
+            SizedBox(
+              height: 30,
+            ),
             Center(
               child: Text('Smart Otp: $_smartOtp\n'),
             )
